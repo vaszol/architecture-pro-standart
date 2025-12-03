@@ -1,13 +1,13 @@
-<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-12-02T14:43:01.530Z" version="22.1.22" etag="YBRLshWsJuC_iKd-xYN-" type="embed">
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" modified="2025-12-03T17:47:56.547Z" etag="IpGwGYAWl1_cmm2dD5g_" version="22.1.22" type="embed">
   <diagram name="Страница-1" id="wsY-v0Sg8HRDCmPjv1K3">
-    <mxGraphModel dx="1216" dy="609" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1200" math="0" shadow="0">
+    <mxGraphModel dx="1222" dy="555" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1000" pageHeight="1200" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="dMSUBOz4bb_g99o1k27s-1" value="&lt;div style=&quot;&quot;&gt;&lt;pre style=&quot;font-family: Inter;&quot;&gt;&lt;span&gt;Схема интеграции приложений с указанием участников процессов&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#001DBC;fillColor=#0050ef;fontColor=#E6D0DE;" parent="1" vertex="1">
           <mxGeometry x="40" y="40" width="920" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="dMSUBOz4bb_g99o1k27s-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontColor=#E6D0DE;" parent="1" source="dMSUBOz4bb_g99o1k27s-2" target="dMSUBOz4bb_g99o1k27s-26" edge="1">
+        <mxCell id="dMSUBOz4bb_g99o1k27s-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontColor=#E6D0DE;" parent="1" source="6" target="dMSUBOz4bb_g99o1k27s-26" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="dMSUBOz4bb_g99o1k27s-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="dMSUBOz4bb_g99o1k27s-41" target="dMSUBOz4bb_g99o1k27s-34" edge="1">
@@ -186,6 +186,33 @@
         </mxCell>
         <mxCell id="dMSUBOz4bb_g99o1k27s-51" value="&lt;span style=&quot;&quot;&gt;Бюро кредитных историй&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#d80073;fontColor=#E6D0DE;strokeColor=#A50040;" parent="1" vertex="1">
           <mxGeometry x="610" y="1120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2" value="Запрос API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="1060" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4" value="изучают детали заявки,&amp;nbsp;решение о выдаче кредита" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="1050" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5" value="обрабатывают заявки из кол-центра,&amp;nbsp;указывает ставку" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="140" y="930" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontColor=#E6D0DE;" edge="1" parent="1" source="dMSUBOz4bb_g99o1k27s-2" target="6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="370" y="680" as="sourcePoint" />
+            <mxPoint x="230" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6" value="Уведомление клиента" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="665" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="10" value="смс оповещение" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="20" y="380" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="11" value="Заведение заявок" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="480" y="390" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="12" value="заводит обращение" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="330" y="370" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
