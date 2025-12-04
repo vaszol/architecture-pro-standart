@@ -1,0 +1,25 @@
+@startuml
+title Контекстная диаграмма C4 - Передача ставок в кол-центр
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "Клиент", Клиент банка Стандарт)
+
+System_Boundary(standart_bank, "Банк стандарт"){
+    Person(call_center, "кол-центр", "Банка Стандарт")
+
+    System(ABS, "Автоматизированная банковская система", "АБС")
+
+    Person(credit_manager, "Менеджер бэк-офиса", "Управление обслуживанием кредитных продуктов")
+}
+System_Ext(call_center_partner, "партнеский кол-центр", "Партнер банка Стандарт" )
+
+Rel(user, call_center, "Звонит с вопросами о ставках")
+Rel(user, call_center_partner, "Звонит с вопросами о ставках")
+Rel(call_center, ABS, "Получение общих и персональных ставок", "Api")
+Rel(call_center_partner, ABS, "Получение общих ставок", "SFTP")
+Rel(credit_manager, ABS, "Обновление ставок")
+
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+title Диаграмма контейнеров C4 - Открытие депозитов онлайн
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+Person(user, "Клиент", Клиент банка Стандарт)
+
+
+System_Boundary(standart_bank, "Банк стандарт"){
+    Container(call_system, "Система кол-центра", "React.js, Java Spring Boot, PostgreSQL")
+    Container(ABS, "Автоматизированная банковская система(АБС)", "Delphi и СУБД на Oracle")
+
+    System_Boundary(front_ofice, "фронт-офис"){
+        Person(call_center_manager, "Менеджер кол-центра", "Кол-центр банка «Стандарт»")
+    }
+    System_Boundary(back_ofice, "бэк-офис"){
+        Person(deposit_manager, "Менеджер бэк-офиса", "Управление обслуживанием депозитных продуктов")
+        Person(credit_manager, "Менеджер бэк-офиса", "Управление обслуживанием кредитных продуктов")
+
+        Container(credit_conv, "Кредитный конвейер", "Camunda, Oracle")
+        Container(credit_score, "Система кредитного скоринга", "Python, Flask, PostgreSQL")
+    }
+}
+System_Boundary(System_Ext, "Внешние системы"){
+    System_Ext(buro_credit_history, "бюро кредитных историй", "внешняя система")
+    System_Ext(call_center_partner, "партнеский кол-центр", "Партнер банка Стандарт" )
+}
+Rel(user, call_system, "Консультации по продуктам")
+Rel(user, call_center_partner, "Консультации по продуктам")
+
+Rel(deposit_manager, ABS, "Обработка заявок")
+Rel(call_center_manager, ABS, "Обработка заявок")
+Rel(call_center_manager, call_system, "Консультации по продуктам")
+Rel(credit_manager, credit_conv, "Источник информации")
+
+Rel(ABS, credit_conv, "кредитные заявки", "1 раз в день")
+Rel(credit_conv, credit_score, "Запрос скоринга", "API")
+Rel(credit_score, ABS, "Запрос данных пользователя")
+Rel(credit_score, buro_credit_history, "Источник информации")
+
+Rel(ABS, call_system, "Обновление стаков", "API")
+Rel(ABS, call_center_partner, "Обновление стаков", "SFTP")
+
+@enduml
