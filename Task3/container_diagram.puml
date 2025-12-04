@@ -1,0 +1,58 @@
+@startuml
+title Диаграмма контейнеров C4 - Открытие депозитов онлайн
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+Person(user, "Клиент", Клиент банка Стандарт)
+
+
+System_Boundary(standart_bank, "Банк стандарт"){
+    Container(standart_site, "Сайт банка", "PHP и React.js")
+    Container(internet_bank, "Интернет-банк", "ASP.NET MVC 4.5")
+    Container(call_system, "Система кол-центра", "React.js, Java Spring Boot, PostgreSQL")
+    Container(ABS, "Автоматизированная банковская система(АБС)", "Delphi и СУБД на Oracle")
+
+    System_Boundary(front_ofice, "фронт-офис"){
+        Person(front_manager, "Менеджер фронт-офиса", "Управление обслуживанием в сети отделений")
+        Person(call_center_manager, "Менеджер кол-центра", "Кол-центр банка «Стандарт»")
+    }
+    System_Boundary(back_ofice, "бэк-офис"){
+        Person(deposit_manager, "Менеджер бэк-офиса", "Управление обслуживанием депозитных продуктов")
+        Person(credit_manager, "Менеджер бэк-офиса", "Управление обслуживанием кредитных продуктов")
+
+        Container(credit_conv, "Кредитный конвейер", "Camunda, Oracle")
+        Container(credit_score, "Система кредитного скоринга", "Python, Flask, PostgreSQL")
+    }
+}
+System_Boundary(System_Ext, "Внешние системы"){
+    System_Ext(buro_credit_history, "бюро кредитных историй", "внешняя система")
+    System_Ext(sms_gateway, "СМС-шлюз телеком-оператора", "СМС уведомления клиента")
+}
+Rel(user, standart_site, "Подает заявку на депозит")
+Rel(user, internet_bank, "Подает заявку на депозит")
+Rel(user, call_system, "Консультации по продуктам")
+Rel(user, front_manager, "Посещение отделения банка")
+
+Rel(standart_site, ABS, "Подача заявок")
+Rel(internet_bank, ABS, "Подача заявок")
+
+Rel(front_manager, ABS, "Подача заявок")
+Rel(deposit_manager, ABS, "Обработка заявок")
+Rel(call_center_manager, ABS, "Обработка заявок")
+Rel(call_center_manager, call_system, "Консультации по продуктам")
+Rel(credit_manager, credit_conv, "Источник информации")
+'Rel(credit_manager, buro_credit_history, "Источник информации")
+
+'Rel(ABS, buro_credit_history, "Источник информации")
+Rel(ABS, sms_gateway, "Уведомления о статусе заявок")
+Rel(ABS, credit_conv, "кредитные заявки", "1 раз в день")
+Rel(credit_conv, credit_score, "Запрос скоринга", "API")
+Rel(credit_score, ABS, "Запрос данных пользователя")
+Rel(credit_score, buro_credit_history, "Источник информации")
+
+Rel(sms_gateway, user, "Уведомления о статусе заявок")
+
+@enduml

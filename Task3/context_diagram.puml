@@ -1,0 +1,37 @@
+@startuml
+title Контекстная диаграмма C4 - Открытие депозитов онлайн
+
+top to bottom direction
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "Клиент", Клиент банка Стандарт)
+
+System_Boundary(standart_bank, "Банк стандарт"){
+    System(standart_site, "Стандарт", "Сайт")
+    System(ABS, "Автоматизированная банковская система", "АБС")
+
+    Person(call_center_manager, "Менеджер кол-центра", Сотрудник банка Стандарт)
+    Person(front_manager, "Менеджер фронт-офиса", Сотрудник банка Стандарт)
+    Person(deposit_manager, "Менеджер бэк-офиса", "специализируются на депозитах")
+}
+System_Boundary(System_Ext, "Внешние системы"){
+    System_Ext(buro_credit_history, "бюро кредитных историй", "внешняя система")
+    System_Ext(sms_gateway, "СМС-шлюз телеком-оператора", "СМС уведомления клиента")
+}
+
+
+Rel(user, standart_site, "Подает заявку на депозит")
+Rel(standart_site, ABS, "Оформление заявки")
+Rel(call_center_manager, ABS, "Обработка заявок на оформление депозита")
+Rel(call_center_manager, buro_credit_history, "Получение информации для открытия депозита")
+Rel(call_center_manager, user, "Консультация по условиям депозита и приглашение в отделение банка", "Телефонный звонок")
+
+Rel(deposit_manager, ABS, "Обрабатывает заявки на депозиты")
+
+Rel(user, front_manager, "Посещение отделения банка")
+Rel(front_manager, ABS, "Оформление депозита в системе")
+Rel(ABS, sms_gateway, "Уведомлени о смене статуса заявки")
+Rel(sms_gateway, user, "СМС-уведомления")
+
+@enduml
