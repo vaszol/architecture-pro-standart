@@ -3,6 +3,7 @@ title Диаграмма контейнеров C4 - Открытие депоз
 
 top to bottom direction
 
+!pragma layout smetana
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 

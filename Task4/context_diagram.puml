@@ -3,6 +3,7 @@ title Контекстная диаграмма C4 - Передача ставо
 
 top to bottom direction
 
+!pragma layout smetana
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
 Person(user, "Клиент", Клиент банка Стандарт)
