@@ -25,6 +25,7 @@ System_Boundary(standart_bank, "Банк стандарт"){
 
         Container(deposit_system, "Система ведения депозитов", "Микросервис", "React.js, Java Spring Boot, PostgreSQL")
         Container(credit_system, "Система кредитования", "Микросервис", "React.js, Java Spring Boot, PostgreSQL")
+        Container(credit_score, "Система кредитного скоринга", "Python, Flask, PostgreSQL")
     }
     System_Boundary(it_service, "ИТ-отдел"){
         Container(standart_site, "Сайт банка", "PHP и React.js")
@@ -65,6 +66,10 @@ Rel(credit_manager, credit_system, "Обработка заявок")
 Rel(deposit_manager, deposit_system, "Обработка заявок")
 Rel(call_center_manager, ABS, "Обработка заявок")
 Rel(call_center_manager, call_system, "Консультации по продуктам")
+
+'Взаимодействие с кредитными скорингом и конввейером
+Rel(credit_system, credit_score, "Запрос скоринга", "API")
+Rel(credit_score, buro_credit_history, "Источник информации", "API")
 
 'Связь с внешними системами
 Rel(service_system, buro_credit_history, "Источник информации")
