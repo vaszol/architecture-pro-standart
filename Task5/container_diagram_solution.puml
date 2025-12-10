@@ -1,0 +1,80 @@
+@startuml
+title Диаграмма контейнеров C4 - Открытие кредитов онлайн
+
+top to bottom direction
+
+!pragma layout smetana
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+Person(user, "Клиент", Клиент банка Стандарт)
+
+
+System_Boundary(standart_bank, "Банк стандарт"){
+
+    System_Boundary(front_ofice, "фронт-офис"){
+        Person(front_manager, "Менеджер фронт-офиса", "Управление обслуживанием в сети отделений")
+        Person(call_center_manager, "Менеджер кол-центра", "Кол-центр банка «Стандарт»")
+
+        Container(ABS, "Автоматизированная банковская система(АБС)", "Delphi и СУБД на Oracle")
+        Container(call_system, "Система кол-центра", "React.js, Java Spring Boot, PostgreSQL")
+    }
+    System_Boundary(back_ofice, "бэк-офис"){
+        Person(credit_manager, "Менеджер бэк-офиса", "Управление обслуживанием кредитных продуктов")
+        Person(deposit_manager, "Менеджер бэк-офиса", "Управление обслуживанием депозитных продуктов")
+
+        Container(deposit_system, "Система ведения депозитов", "Микросервис", "React.js, Java Spring Boot, PostgreSQL")
+        Container(credit_system, "Система кредитования", "Микросервис", "React.js, Java Spring Boot, PostgreSQL")
+        Container(credit_score, "Система кредитного скоринга", "Python, Flask, PostgreSQL")
+    }
+    System_Boundary(it_service, "ИТ-отдел"){
+        Container(standart_site, "Сайт банка", "PHP и React.js")
+        Container(internet_bank, "Интернет-банк", "ASP.NET MVC 4.5")
+
+        ContainerQueue(queue, "Message Queue", "ActiveMQ", "Шина событий")
+        Container(service_system, "Сервис обработки процессов", "Java Spring Boot")
+        ContainerDb(db, "База данных", "PostgreSQL", "Хранит информацию")
+    }
+}
+System_Boundary(System_Ext, "Внешние системы"){
+    System_Ext(buro_credit_history, "бюро кредитных историй", "внешняя система")
+    System_Ext(sms_gateway, "СМС-шлюз телеком-оператора", "СМС уведомления клиента")
+}
+'взаимодействие пользователя с системами банка
+Rel(user, standart_site, "Подает заявку на депозит")
+Rel(user, internet_bank, "Подает заявку на депозит")
+Rel(user, call_system, "Консультации по продуктам")
+Rel(user, front_manager, "Посещение отделения банка")
+
+'очередь сообщений
+Rel(standart_site, queue, "очередь сообщений")
+Rel(internet_bank, queue, "очередь сообщений")
+Rel(service_system, queue, "очередь сообщений")
+Rel(queue, ABS, "очередь сообщений")
+Rel(queue, credit_system, "очередь сообщений")
+Rel(queue, deposit_system, "очередь сообщений")
+
+'общий источник данных систем
+Rel(ABS, db, "Источник информации")
+Rel(service_system, db, "Источник информации")
+Rel(credit_system, db, "Источник информации")
+Rel(deposit_system, db, "Источник информации")
+
+'взаимедейстие с системами
+Rel(front_manager, ABS, "Обработка заявок")
+Rel(credit_manager, credit_system, "Обработка заявок")
+Rel(deposit_manager, deposit_system, "Обработка заявок")
+Rel(call_center_manager, ABS, "Обработка заявок")
+Rel(call_center_manager, call_system, "Консультации по продуктам")
+
+'Взаимодействие с кредитными скорингом и конввейером
+Rel(credit_system, credit_score, "Запрос скоринга", "API")
+Rel(credit_score, buro_credit_history, "Источник информации", "API")
+
+'Связь с внешними системами
+Rel(service_system, buro_credit_history, "Источник информации")
+Rel(service_system, sms_gateway, "уведомления клиента")
+
+Rel(sms_gateway, user, "Уведомления о статусе заявок")
+
+@enduml
